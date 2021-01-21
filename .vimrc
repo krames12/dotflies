@@ -34,7 +34,9 @@ let g:WebDevIconsOS = 'Darwin'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } |
            \ Plug 'junegunn/fzf.vim'
-Plug 'jremmen/vim-ripgrep'
+Plug 'jremmen/vim-ripgrep' "easier way to search through a directory
+Plug 'itchyny/lightline.vim' "status bar at the bottom
+Plug 'tpope/vim-fugitive' "git companion for vim
 
 "Theme
 Plug 'ayu-theme/ayu-vim'
@@ -56,3 +58,14 @@ colorscheme ayu
 nnoremap <C-b> :NERDTreeToggle<CR>
 autocmd VimEnter * NERDTree
 
+"LightLine config
+"Shows current mode, branch, and file
+let g:lightline = {
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ],
+	\             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+	\ },
+	\ 'component_function': {
+	\   'gitbranch': 'FugitiveHead'
+	\ },
+	\ }
