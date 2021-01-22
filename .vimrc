@@ -37,6 +37,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } |
 Plug 'jremmen/vim-ripgrep' "easier way to search through a directory
 Plug 'itchyny/lightline.vim' "status bar at the bottom
 Plug 'tpope/vim-fugitive' "git companion for vim
+Plug 'ctrlpvim/ctrlp.vim' "CTRL + P functionality for file finding
 
 "Theme
 Plug 'ayu-theme/ayu-vim'
@@ -57,6 +58,8 @@ colorscheme ayu
 " Start NERDTree and leave the cursor in it.
 nnoremap <C-b> :NERDTreeToggle<CR>
 autocmd VimEnter * NERDTree
+let g:NERDTreeWinPos = "right"
+let g:NERDTreeWinSize = "42"
 
 "LightLine config
 "Shows current mode, branch, and file
@@ -69,3 +72,7 @@ let g:lightline = {
 	\   'gitbranch': 'FugitiveHead'
 	\ },
 	\ }
+
+"CtrlP mapping
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
