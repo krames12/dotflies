@@ -65,7 +65,7 @@ let g:NERDTreeWinSize = "42"
 let g:lightline = {
 	\ 'active': {
 	\   'left': [ [ 'mode', 'paste' ],
-	\             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+	\             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ]
 	\ },
 	\ 'component_function': {
 	\   'gitbranch': 'FugitiveHead'
@@ -75,4 +75,18 @@ let g:lightline = {
 "FZF shortcut commands
 nnoremap ff :Files<CR>
 nnoremap fl :Lines<CR>
-let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+let $FZF_DEFAULT_COMMAND="rg --files --hidden"
+
+command! -bang -nargs=* BLines
+    \ call fzf#vim#grep(
+    \   'rg --with-filename --column --line-number --no-heading --smart-case . '.fnameescape(expand('%:p')), 1,
+    \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --with-nth=4.. --delimiter=":"'}))
+
+" do not search filename, just file contents
+command! -bang -nargs=* Lines
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --colors "path:fg:190,220,255" --colors "line:fg:128,128,128" --smart-case  -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview({ 'options': ['--delimiter', ':', '--nth', '4..', '--color', 'hl:123,hl+:222'] }), <bang>0)
