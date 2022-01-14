@@ -1,6 +1,11 @@
 set nocompatible " be iMproved, required
 syntax enable
 
+" editor related settings
+set number
+set expandtab
+set shiftwidth=2
+set smartindent
 
 " Plugins
 
@@ -11,6 +16,8 @@ call plug#begin('~/.vim/plugged')
 "Ruby Plugins
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-endwise'
 Plug 'vim-ruby/vim-ruby'
 
 "Javascript Plugins
@@ -37,6 +44,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } |
 Plug 'jremmen/vim-ripgrep' "easier way to search through a directory
 Plug 'itchyny/lightline.vim' "status bar at the bottom
 Plug 'tpope/vim-fugitive' "git companion for vim
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "code completion drop down
 
 "Theme
 Plug 'ayu-theme/ayu-vim'
@@ -59,6 +67,7 @@ nnoremap <C-b> :NERDTreeToggle<CR>
 autocmd VimEnter * NERDTree
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeWinSize = "42"
+let g:NERDTreeShowHidden = 1
 
 "LightLine config
 "Shows current mode, branch, and file
@@ -78,7 +87,7 @@ nnoremap fl :Lines<CR>
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
-let $FZF_DEFAULT_COMMAND="rg --files --hidden"
+let $FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git"'
 
 command! -bang -nargs=* BLines
     \ call fzf#vim#grep(
@@ -90,3 +99,12 @@ command! -bang -nargs=* Lines
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --colors "path:fg:190,220,255" --colors "line:fg:128,128,128" --smart-case  -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview({ 'options': ['--delimiter', ':', '--nth', '4..', '--color', 'hl:123,hl+:222'] }), <bang>0)
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+" inoremap <silent><expr> <TAB>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ <SID>check_back_space() ? "\<TAB>" :
+"      \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"

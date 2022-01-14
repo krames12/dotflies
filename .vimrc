@@ -37,7 +37,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } |
 Plug 'jremmen/vim-ripgrep' "easier way to search through a directory
 Plug 'itchyny/lightline.vim' "status bar at the bottom
 Plug 'tpope/vim-fugitive' "git companion for vim
-Plug 'ctrlpvim/ctrlp.vim' "CTRL + P functionality for file finding
 
 "Theme
 Plug 'ayu-theme/ayu-vim'
@@ -73,6 +72,7 @@ let g:lightline = {
 	\ },
 	\ }
 
-"CtrlP mapping
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+"FZF shortcut commands
+nnoremap ff :Files<CR>
+nnoremap fl :Lines<CR>
+let g:fzf_layout = { 'down': '~40%' }
