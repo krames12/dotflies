@@ -102,45 +102,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Update terminal
 alias uz='source ~/.zshrc'
-
-# Git
-alias gap='git add -p'
-alias gs='git status'
-alias gcom='git commit -m'
-alias gcheck='git checkout'
-alias gpsu='git push --set-upstream'
-
+alias vim='nvim'
+alias da='direnv allow'
+alias dr='direnv reload'
 alias yeet='rm -rf'
 
-# Dotcom brand shortcuts
-alias tn-setup='BRAND="tuftandneedle" bin/setup'
-alias serta-setup='BRAND="serta" bin/setup'
-alias br-setup='BRAND="beautyrest" bin/setup'
-alias tn-start='BRAND="tuftandneedle" bin/start-dev'
-alias serta-start='BRAND="serta" bin/start-dev'
-alias br-start='BRAND="beautyrest" bin/start-dev'
-
-# Dotfiles Alias
-alias dotflies='/usr/bin/git --git-dir=$HOME/.dotflies/ --work-tree=$HOME'
-
-# tabtab source for packages
-# uninstall by removing these lines
-[ -f ~/.config/tabtab/__tabtab.bash ] && . ~/.config/tabtab/__tabtab.bash || true
-
-# FZF
-if type rg &> /dev/null; then
-  export FZF_DEFAULT_OPTS='-m --height 50% --border'
-fi
-
-# Cucumber
-export CUCUMBER_FORMAT=pretty
-
-# Platform config
-PATH="$PATH:$HOME/.asdf/bin"
-export ASDF_SKIP_RESHIM=1
-source "$HOME/.asdf/lib/asdf.sh"
 
 eval "$(asdf exec direnv hook zsh)"
 
